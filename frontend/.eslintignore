@@ -1,0 +1,4 @@
+**/*.min.js
+**/plugins/*
+**/build/npm
+ad.js
