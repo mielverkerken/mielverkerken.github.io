@@ -269,7 +269,8 @@ figure {
         display: block;
         margin-bottom: 10px; }
         #colorlib-hero .flexslider .flex-control-nav li a {
-          background: rgba(0, 0, 0, 0.5);
+          /*background: rgba(0, 0, 0, 0.5);*/
+          background: rgba(255, 255, 255, 0.5);
           -webkit-box-shadow: none;
           box-shadow: none;
           width: 12px;
@@ -277,7 +278,7 @@ figure {
           cursor: pointer; }
           #colorlib-hero .flexslider .flex-control-nav li a.flex-active {
             cursor: pointer;
-            background: transparent;
+            /*background: transparent;*/
             border: 2px solid #2c98f0; }
     #colorlib-hero .flexslider .flex-direction-nav {
       display: none; }
