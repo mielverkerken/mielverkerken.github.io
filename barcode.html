@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="scandit-barcode-picker"></div>
+<script src="https://cdn.jsdelivr.net/npm/scandit-sdk@5.x"></script>
+<script>
+    function initScanner() {
+        console.log("tets")
+        ScanditSDK.configure("AQwvFhnHBl9MFixs5SOOt7UdpWJKRNo1M0gK2bx2GIRoEwo+tQpsCD50E07oXnQ5a1Do+eNUH9+4URbGjkPaswlBkGPhSJaIFXcsgLw0Jp63QWfAaSuZddg1qMpMINpvF2hp6fJPbFxSv7t6kMNvE6IqRGJZC4cUYC7M3mVFKwJ8dnNNDKM//akFE309IbAPtJbsTpJ06Xyv6Ak0DlSRMvPXoWOk5jY9ENoOvxwtK6iqebEZ6q43djorD3A1s6BRYBlZfg6qAhN0zodzLyymN7ikWTuI1vHcUjhMmTInV/x0iu7vz1VTWJY2CgGpdppObdmG1dpu+6OSGo7tDIocI3M1WkriCpQigWnmn5wyZI6MzyGfOQZedOPPOsFaABo6DkBgZU2IeevMfaG9zKytkEIbW3pHbvuwT7frGoU5Ydomd0a6DfWrljukhqCULIelUivC0LqSk57b64R0s97vDGfH4ZrBA5NEDlTNIS+TEwuszQu3wcvx6vpZjsSQlwywIg+UGloHWCkZzzwgOUYRYYZUvWog0sXMMGgx2qDmOkzZcZvi2D4b1AB/jyxBhFoJOTgEatrnac9jh33jQEAMhWWCS7+GBwgreT3f//rHVPliBkmVJ6eO4pDlz4D1aTcfX7ox1uEzzl2cYtWTrv51TD8LzezpMJhWBKebB5E3HV0yeCHUHdZar0062pLD/blSiWg+HB/1gLIb+ae69dC6W8T5SU8Q/VTHOYR0dkp6OJ/N25Rv227sgmtFtdEb9qe0kuCsaV8Czl8mrigRqVQ5icG237R0YosiEwLqQZfU", {
+            engineLocation: "https://cdn.jsdelivr.net/npm/scandit-sdk@5.x/build/",
+        })
+            .then(() => {
+                return ScanditSDK.BarcodePicker.create(document.getElementById("scandit-barcode-picker"), {
+                    playSoundOnScan: true,
+                    vibrateOnScan: true,
+                    guiStyle: ScanditSDK.BarcodePicker.GuiStyle.NONE,
+                    // enable some common symbologies
+                    scanSettings: new ScanditSDK.ScanSettings({enabledSymbologies: ["ean8", "ean13", "upca", "upce"]}),
+                    singleImageModeSettings: {
+                        desktop: {
+                            usageStrategy: ScanditSDK.SingleImageModeSettings.UsageStrategy.FALLBACK,
+                            informationElement: document.createElement("div"),
+                            // buttonElement: "<SVGElement>",
+                            containerStyle: {backgroundColor: "#FFFFFF"},
+                            informationStyle: {color: "#333333"},
+                            buttonStyle: {borderColor: "#333333", color: "#333333", fill: "#333333"}
+                        },
+                        mobile: {
+                            usageStrategy: ScanditSDK.SingleImageModeSettings.UsageStrategy.FALLBACK,
+                            informationElement: document.createElement("div"),
+                            // buttonElement: "<SVGElement>",
+                            containerStyle: {backgroundColor: "#FFFFFF"},
+                            informationStyle: {color: "#333333"},
+                            buttonStyle: {borderColor: "#333333", color: "#333333", fill: "#333333"}
+                        }
+                    }
+                });
+            })
+            .then((barcodePicker) => {
+                // barcodePicker is ready here, show a message every time a barcode is scanned
+                barcodePicker.on("scan", (scanResult) => {
+                    alert(scanResult.barcodes[0].data);
+                    // barcodePicker.destroy();
+                    // initScanner();
+                });
+            });
+    }
+
+    window.onload = initScanner
+</script>
+</body>
+</html>
